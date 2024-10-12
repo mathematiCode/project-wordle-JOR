@@ -84,6 +84,7 @@ h1 {
 }
 
 .guess-results {
+  all: unset;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -92,8 +93,8 @@ h1 {
 
 .guess {
   display: flex;
-  gap: 4px;
-  margin-bottom: 4px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .cell {
