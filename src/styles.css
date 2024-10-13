@@ -61,7 +61,7 @@ header .side {
 
 h1 {
   flex: 1;
-  font-size: 2rem;
+  font-size: 2.6rem;
   line-height: var(--header-height);
   text-align: center;
 }
@@ -95,6 +95,7 @@ h1 {
   display: flex;
   gap: 8px;
   margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .cell {
