@@ -1,15 +1,30 @@
 import React from "react";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
-function GuessForm({ guessList, setGuessList }) {
+function GuessForm({
+  guessList,
+  setGuessList,
+  answer,
+  result,
+  setResult,
+  numGuesses,
+  setNumGuesses,
+}) {
   const [guess, setGuess] = React.useState("");
 
   function handleEnter(event) {
     event.preventDefault();
     if (guess.length === 5) {
-      console.log("guess is", guess);
       let newGuessList = [...guessList, guess.toUpperCase()];
       setGuessList(newGuessList);
+      setNumGuesses(newGuessList.length);
+      if (guess === answer) {
+        setResult("win");
+      }
       setGuess("");
+      if (newGuessList.length >= NUM_OF_GUESSES_ALLOWED) {
+        setResult("lose");
+      }
     }
   }
   function handleInputChange(event) {
@@ -33,6 +48,7 @@ function GuessForm({ guessList, setGuessList }) {
         pattern="[a-zA-Z]{5}"
         title="5 letter word"
         value={guess}
+        disabled={result === "win" || result === "lose"}
         onChange={(event) => handleInputChange(event)}
       ></input>
     </form>

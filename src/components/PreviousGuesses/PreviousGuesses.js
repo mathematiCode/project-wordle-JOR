@@ -1,34 +1,32 @@
 import React from "react";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import SingleGuessFeedback from "../SingleGuessFeedback";
 
-function PreviousGuesses({ guessList }) {
-  let temporaryGuessList = [...guessList];
-  for (let i = 0; i < 6; i++) {
-    if (!temporaryGuessList[i]) {
-      temporaryGuessList[i] = "     ";
-    }
-    if (temporaryGuessList.length > 6) {
-      temporaryGuessList = temporaryGuessList.slice(0, 6);
-    }
+function PreviousGuesses({ guessList, answer }) {
+  let placeholderArray = [];
+  for (let i = guessList.length; i < NUM_OF_GUESSES_ALLOWED; i++) {
+    placeholderArray.push("     ");
   }
   return (
-    <ol className="guess-results">
-      {temporaryGuessList.map((guess, index) => (
-        <li key={`guess #${index}: ${guess}`} className="guess">
+    <ol key="allGuesses" className="guess-results">
+      {guessList.map((guess, index) => (
+        <SingleGuessFeedback
+          guess={guess}
+          answer={answer}
+          key={`guess #${index}: ${guess}`}
+        ></SingleGuessFeedback>
+      ))}
+      {placeholderArray.map((emptyString) => (
+        <li className="guess">
+          <span key={0} className="cell">
+            {emptyString[0]}
+          </span>
           <span key={1} className="cell">
-            {guess[0]}
+            {emptyString[1]}
           </span>
-          <span key={2} className="cell">
-            {guess[1]}
-          </span>
-          <span key={3} className="cell">
-            {guess[2]}
-          </span>
-          <span key={4} className="cell">
-            {guess[3]}
-          </span>
-          <span key={5} className="cell">
-            {guess[4]}
-          </span>
+          <span className="cell">{emptyString[2]}</span>
+          <span className="cell">{emptyString[3]}</span>
+          <span className="cell">{emptyString[4]}</span>
         </li>
       ))}
     </ol>
